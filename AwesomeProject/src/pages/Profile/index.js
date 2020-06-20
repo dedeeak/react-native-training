@@ -24,11 +24,7 @@ const Profile = ({navigation}) => {
     }
 
     const removeValue = async () => {
-        try {
-            await AsyncStorage.removeItem('login_token');
-        } catch(e) {
-            // remove error
-        }
+        await AsyncStorage.removeItem('login_token');
         console.log('Local storage cleaned.');
         navigation.navigate('Landing');
       }

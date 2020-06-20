@@ -31,6 +31,19 @@ import { gql } from "apollo-boost";
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Home = ({navigation}) => {
+    const getToken = async (key) => {
+        console.log("Get token: " + key);
+        return await AsyncStorage.getItem(key);
+    }
+    const cekToken = async () => {
+        let tokenResult = await getToken('login_token');
+        console.log('Get token result: ' + JSON.stringify(tokenResult));
+        if ( tokenResult !== null ) {
+            navigation.navigate('Profile');
+        }
+    }
+    cekToken();
+
     const [username, setUsername] = useState('tomo@icube.us');//useState(Platform.OS === 'ios' ? '' : null);
     const [password, setPassword] = useState('Admin123');//useState(Platform.OS === 'ios' ? '' : null);
 
@@ -38,10 +51,7 @@ const Home = ({navigation}) => {
         console.log("Set token: " + value);
         return await AsyncStorage.setItem(key, value);
     }
-    const getToken = async (key) => {
-        console.log("Get token: " + key);
-        return await AsyncStorage.getItem(key);
-    }
+    
     const postLogin = () => {
         let schema = gql`
             mutation generateCustomerTokenCustom( $email: String!, $pass: String! ) {
@@ -58,11 +68,11 @@ const Home = ({navigation}) => {
             console.log(user.token);
             if (user.token) {
                 setToken('login_token', user.token);
-                //navigation.navigate('Profile');
-                console.log('Get token result: ' + JSON.stringify(getToken('login_token')));
+                navigation.navigate('Profile');
             }
         });
     }
+
     return (
         <>
         <SafeAreaView>
