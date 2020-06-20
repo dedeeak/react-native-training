@@ -1,26 +1,29 @@
-// import React from 'react';
-// import { View, Text, Image } from 'react-native';
-
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text, TextInput, SafeAreaView, TouchableOpacity } from 'react-native';
-
-import styles from './src/assets/styles.js';
-
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Home from './src/pages/Home'
+import Profile from './src/pages/Profile';
+import Landing from './src/pages/Landing';
+const Stack = createStackNavigator();
 const App = () => {
-    return (
-        <SafeAreaView>
-            <View style={[styles.wrapper]}>
-                <Text>Username</Text>
-                <TextInput style={[styles.textInput]}></TextInput>
-                <Text>Password</Text>
-                <TextInput style={[styles.textInput]}></TextInput>
-                <TouchableOpacity
-                    style={styles.buttonLogin}>
-                    <Text style={[styles.textLoginButton]}>Login</Text>
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
-    )
-}
-
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Landing" 
+          component={Landing} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Ini Home'}}
+        />
+        <Stack.Screen 
+          name="Profile" 
+          component={Profile} 
+          options={{title: 'Ini Profile'}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 export default App;
