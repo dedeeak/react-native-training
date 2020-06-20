@@ -8,7 +8,7 @@ import {
 const Profile = ({navigation}) => {
     getData = async () => {
         try {
-            const value = await AsyncStorage.getItem('@storage_Key')
+            const value = await AsyncStorage.getItem('login_token')
             if ( value !== null ) {
                 console.log(value);
             }
@@ -25,7 +25,7 @@ const Profile = ({navigation}) => {
 
     const removeValue = async () => {
         try {
-            await AsyncStorage.removeItem('@storage_Key');
+            await AsyncStorage.removeItem('login_token');
         } catch(e) {
             // remove error
         }
